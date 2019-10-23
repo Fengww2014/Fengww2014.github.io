@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<script src="/js/src/click.js"></script>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>P4app-docker - Feng-Blog</title>
+
+
+    <meta name="description" content="介绍p4appp4app是一个可以构建、运行、调试和测试P4程序的工具，p4app背后蕴含的哲学是“简单的事情应尽可能简单”，旨在使小而简单的P4程序易于编写、易于与他人分享。这个工具站的角度比较高，忽略了底层的一些配置，让用户了解p4的门槛变低，直接开始设计p4程序。👌 p4lang/p4app的镜像结构Docker 镜像是分层结构以Ubuntu 16.04为base镜像依次构建，p4app为">
+<meta name="keywords" content="P4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P4app-docker">
+<meta property="og:url" content="https://fengww2014.github.io/2019/10/24/P4app_Docker/index.html">
+<meta property="og:site_name" content="Feng-Blog">
+<meta property="og:description" content="介绍p4appp4app是一个可以构建、运行、调试和测试P4程序的工具，p4app背后蕴含的哲学是“简单的事情应尽可能简单”，旨在使小而简单的P4程序易于编写、易于与他人分享。这个工具站的角度比较高，忽略了底层的一些配置，让用户了解p4的门槛变低，直接开始设计p4程序。👌 p4lang/p4app的镜像结构Docker 镜像是分层结构以Ubuntu 16.04为base镜像依次构建，p4app为">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://source.unsplash.com/1600x900/?docker">
+<meta property="og:updated_time" content="2019-10-23T16:48:53.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="P4app-docker">
+<meta name="twitter:description" content="介绍p4appp4app是一个可以构建、运行、调试和测试P4程序的工具，p4app背后蕴含的哲学是“简单的事情应尽可能简单”，旨在使小而简单的P4程序易于编写、易于与他人分享。这个工具站的角度比较高，忽略了底层的一些配置，让用户了解p4的门槛变低，直接开始设计p4程序。👌 p4lang/p4app的镜像结构Docker 镜像是分层结构以Ubuntu 16.04为base镜像依次构建，p4app为">
+<meta name="twitter:image" content="https://source.unsplash.com/1600x900/?docker">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.ico" alt="P4app-docker" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?docker" alt="P4app-docker">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 750 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                P4app-docker
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h1 id="介绍p4app"><a href="/2019/10/24/P4app_Docker/#介绍p4app" class="headerlink" title="介绍p4app"></a>介绍p4app</h1><p>p4app是一个可以构建、运行、调试和测试P4程序的工具，p4app背后蕴含的哲学是“简单的事情应尽可能简单”，旨在使小而简单的P4程序易于编写、易于与他人分享。这个工具站的角度比较高，忽略了底层的一些配置，让用户了解p4的门槛变低，直接开始设计p4程序。👌</p>
+<h1 id="p4lang-p4app的镜像结构"><a href="/2019/10/24/P4app_Docker/#p4lang-p4app的镜像结构" class="headerlink" title="p4lang/p4app的镜像结构"></a>p4lang/p4app的镜像结构</h1><p>Docker 镜像是分层结构以Ubuntu 16.04为base镜像依次构建，p4app为最顶层.<br>对于如何构建这些镜像，有兴趣的可以看p4app的Dockerfile.💪</p>
+<ul>
+<li>p4app</li>
+<li>p4c</li>
+<li>pi</li>
+<li>bmv2</li>
+<li>third-party</li>
+<li>ubuntu：16.04<a id="more"></a>
+<h1 id="安装p4app"><a href="/2019/10/24/P4app_Docker/#安装p4app" class="headerlink" title="安装p4app"></a>安装p4app</h1></li>
+<li>前提保证机器上安装了docker 🖥<br>下载github的p4app源码<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/p4lang/p4app.git </span><br><span class="line">cd p4app</span><br><span class="line">sudo cp p4app /usr/local/bin</span><br><span class="line">p4app run examples/simple_router.p4app</span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul>
+<p>😘 其他具体的说明参照<a href="https://github.com/p4lang/p4app" target="_blank" rel="noopener">https://github.com/p4lang/p4app</a>中README.md的说明。</p>
+<h1 id="下面讨论下p4c-和-p4c-bm-的关系以及-p4factory-和-p4app-的关系"><a href="/2019/10/24/P4app_Docker/#下面讨论下p4c-和-p4c-bm-的关系以及-p4factory-和-p4app-的关系" class="headerlink" title="下面讨论下p4c 和 p4c-bm 的关系以及 p4factory 和 p4app 的关系"></a>下面讨论下p4c 和 p4c-bm 的关系以及 p4factory 和 p4app 的关系</h1><p>从sdnlab网站上帖子的理解，大概是这样的：P4语言(P4_14)提出不久时，p4-hilr：<a href="https://github.com/p4lang/p4-hlir" target="_blank" rel="noopener">https://github.com/p4lang/p4-hlir</a>是它的编译器，P4软件交换机是BMv1: <a href="https://github.com/p4lang/p4c-behavioral" target="_blank" rel="noopener">https://github.com/p4lang/p4c-behavioral</a>；同时，为使大家更好的上手P4语言，提供了p4factory和tutorials这两个仓库；<br>后来P4社区使用C++重写了BMv1软件交换机，形成现在通用的<strong>P4软件交换机BMv2</strong>：🖥<a href="https://github.com/p4lang/behavioral-model" target="_blank" rel="noopener">https://github.com/p4lang/behavioral-model</a>，并对p4-hilr编译器做了对应的拓展，形成p4c-bm编译器，p4c-bm 只支持 p4-14 而且指针对 bmv2 这个目标，而 p4c 可以支持 p4-14 和 p4-16，而且包含了多个后端编译器。16年，为解决P4_14语言的语法问题和限制，社区开发了P4_16语言，并基于P4_16语言做了新的编译器p4c；<strong>p4c是P4语言的前端编译器</strong>，🌐既支持p4_16语言也支持p4_14语言，同时允许各大厂商开发架构相关的的后端编译器，即对应于ebpf、bmv2、tofino、NetFPGA等架构的后端编译器。这个过程中，P4语言官方教程Tutorial是不断更新的，而p4factory不再被官方维护，所以如果要上手P4的话建议从Tutorial开始。p4app是通过docker环境运行P4实验的一个仓库，可以参考上面的教程或者想多了解可以访问孙勇峰老师的博客：<a href="/2019/10/24/P4app_Docker/201705/networks/p4/repo_p4app.html">sunyongfeng.com/201705/networks/p4/repo_p4app.html</a>。</p>
+</body></html>
+        </div>
+
+        
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://fengww2014.github.io/2019/10/24/P4app_Docker/">P4app-docker</a></li>
+        <li><strong>本文作者：</strong><a href="https://fengww2014.github.io">Fengww</a></li>
+        <li><strong>本文链接：</strong><a href="https://fengww2014.github.io/2019/10/24/P4app_Docker/">https://fengww2014.github.io/2019/10/24/P4app_Docker/</a></li>
+        <li><strong>发布时间：</strong>2019-10-24</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/P4/">P4</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/24/HTTP_Comprehensive/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">HTTP全解</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/hello-world/">
+                <span class="level-item">Hello World</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'OKSks70kWKdXwFM1JjY8N3kV-gzGzoHsz',
+        app_key: 'PEGLEFFvs7Ddbs8USdkMbx89',
+        placeholder: 'Say something...'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="冯少侠在江湖">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯少侠在江湖
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        孤独的风中一匹狼
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>HeFei, China, USTC</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Fengww2014" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/Fengww2014">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#介绍p4app">
+        <span class="has-mr-6">1</span>
+        <span>介绍p4app</span>
+        </a></li><li>
+        <a class="is-flex" href="#p4lang-p4app的镜像结构">
+        <span class="has-mr-6">2</span>
+        <span>p4lang/p4app的镜像结构</span>
+        </a></li><li>
+        <a class="is-flex" href="#安装p4app">
+        <span class="has-mr-6">3</span>
+        <span>安装p4app</span>
+        </a></li><li>
+        <a class="is-flex" href="#下面讨论下p4c-和-p4c-bm-的关系以及-p4factory-和-p4app-的关系">
+        <span class="has-mr-6">4</span>
+        <span>下面讨论下p4c 和 p4c-bm 的关系以及 p4factory 和 p4app 的关系</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.ico" alt="P4app-docker" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Fengww&nbsp;
+                Powered &#10084; Feng · Weiwei
+                </p>
+            </div>
+            
+
+            
+            <div class="level-end">
+
+
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("10/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+        </div>
+        </div>
+
+    </div>
+
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+</body>
+</html>

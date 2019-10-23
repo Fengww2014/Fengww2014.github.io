@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<script src="/js/src/click.js"></script>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>HTTP全解 - Feng-Blog</title>
+
+
+    <meta name="description" content="http是目前访问网页最主流的应用层协议，但是对于http应用层和下面的传输层之间的关系，一直不是特别的清楚，遂就本文对http协议从网络层次的角度来仔细剖析，并写了python脚本试图复原整个的http请求全流程。 1. 用scapy实现http请求全流程1.1 http请求和响应的全流程主要的步骤包括建立连接、http request和response交互、关闭连接等，下面逐一讲解。 1.2">
+<meta name="keywords" content="http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP全解">
+<meta property="og:url" content="https://fengww2014.github.io/2019/10/24/HTTP_Comprehensive/index.html">
+<meta property="og:site_name" content="Feng-Blog">
+<meta property="og:description" content="http是目前访问网页最主流的应用层协议，但是对于http应用层和下面的传输层之间的关系，一直不是特别的清楚，遂就本文对http协议从网络层次的角度来仔细剖析，并写了python脚本试图复原整个的http请求全流程。 1. 用scapy实现http请求全流程1.1 http请求和响应的全流程主要的步骤包括建立连接、http request和response交互、关闭连接等，下面逐一讲解。 1.2">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://source.unsplash.com/1600x900/?HTTP">
+<meta property="og:updated_time" content="2019-10-23T16:48:53.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP全解">
+<meta name="twitter:description" content="http是目前访问网页最主流的应用层协议，但是对于http应用层和下面的传输层之间的关系，一直不是特别的清楚，遂就本文对http协议从网络层次的角度来仔细剖析，并写了python脚本试图复原整个的http请求全流程。 1. 用scapy实现http请求全流程1.1 http请求和响应的全流程主要的步骤包括建立连接、http request和response交互、关闭连接等，下面逐一讲解。 1.2">
+<meta name="twitter:image" content="https://source.unsplash.com/1600x900/?HTTP">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="is-2-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.ico" alt="HTTP全解" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-8-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?HTTP" alt="HTTP全解">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/http/">http</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25 minutes read (About 3704 words)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span> visits
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                HTTP全解
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>http是目前访问网页最主流的应用层协议，但是对于http应用层和下面的传输层之间的关系，一直不是特别的清楚，遂就本文对http协议从网络层次的角度来仔细剖析，并写了python脚本试图复原整个的http请求全流程。</p>
+<h2 id="1-用scapy实现http请求全流程"><a href="#1-用scapy实现http请求全流程" class="headerlink" title="1. 用scapy实现http请求全流程"></a>1. 用scapy实现http请求全流程</h2><h3 id="1-1-http请求和响应的全流程"><a href="#1-1-http请求和响应的全流程" class="headerlink" title="1.1 http请求和响应的全流程"></a>1.1 http请求和响应的全流程</h3><p><img src="/2019/10/24/HTTP_Comprehensive/1562218975750.jpg" alt><br>主要的步骤包括建立连接、http request和response交互、关闭连接等，下面逐一讲解。</p>
+<h3 id="1-2-TCP-IP协议"><a href="/2019/10/24/HTTP_Comprehensive/#1-2-TCP-IP协议" class="headerlink" title="1.2 TCP/IP协议"></a>1.2 TCP/IP协议</h3><p>TCP/IP协议模型（Transmission Control Protocol/Internet Protocol），包含了一系列构成互联网基础的网络协议，是Internet的核心协议，通过20多年的发展已日渐成熟，并被广泛应用于局域网和广域网中（<em>如果局域网是小溪，很多条小溪就汇聚成大的干流，比如长江、黄河，干流就是广域网，然后再流入大海，大海就是互联网</em>），目前已成为事实上的国际标准。TCP/IP协议簇是一组不同层次上的多个协议的组合，通常被认为是一个四层协议系统，与OSI的七层模型相对应。</p>
+<a id="more"></a>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219004363.jpg" alt></p>
+<p>HTTP协议就是基于TCP/IP协议模型来传输信息的，http协议是无状态，面向连接的，位于应用层的协议。下面的思维导图是tcp/ip涉及到的知识框架。</p>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219014914.png" alt></p>
+<h4 id="1-链路层"><a href="/2019/10/24/HTTP_Comprehensive/#1-链路层" class="headerlink" title="(1). 链路层"></a>(1). 链路层</h4><p>也称作数据链路层或网络接口层（在第一个图中为网络接口层和硬件层），通常包括操作系统中的设备驱动程序和计算机中对应的网络接口卡。它们一起处理与电缆（或其他任何传输媒介）的物理接口细节。ARP（地址解析协议）和RARP（逆地址解析协议）是某些网络接口（如以太网和令牌环网）使用的特殊协议，用来转换IP层和网络接口层使用的地址。</p>
+<h4 id="2-网络层"><a href="/2019/10/24/HTTP_Comprehensive/#2-网络层" class="headerlink" title="(2). 网络层"></a>(2). 网络层</h4><p>也称作互联网层（在第一个图中为网际层），处理分组在网络中的活动，例如分组的选路。在TCP/IP协议族中，网络层协议包括IP协议（网际协议），ICMP协议（Internet互联网控制报文协议），以及IGMP协议（Internet组管理协议）。</p>
+<p>IP是一种网络层协议，提供的是一种不可靠的服务，它只是尽可能快地把分组从源结点送到目的结点，但是并不提供任何可靠性保证。同时被TCP和UDP使用。TCP和UDP的每组数据都通过端系统和每个中间路由器中的IP层在互联网中进行传输。</p>
+<p>ICMP是IP协议的附属协议。IP层用它来与其他主机或路由器交换错误报文和其他重要信息。</p>
+<p>IGMP是Internet组管理协议。它用来把一个UDP数据报多播到多个主机。</p>
+<h4 id="3-传输层"><a href="/2019/10/24/HTTP_Comprehensive/#3-传输层" class="headerlink" title="(3). 传输层"></a>(3). 传输层</h4><p>主要为两台主机上的应用程序提供端到端的通信。在TCP/IP协议族中，有两个互不相同的传输协议：TCP（传输控制协议）和UDP（用户数据报协议）。</p>
+<p>TCP为两台主机提供高可靠性的数据通信。它所做的工作包括把应用程序交给它的数据分成合适的小块交给下面的网络层，确认接收到的分组，设置发送最后确认分组的超时时钟等。由于运输层提供了高可靠性的端到端的通信，因此应用层可以忽略所有这些细节。为了提供可靠的服务，TCP采用了超时重传、发送和接收端到端的确认分组等机制。</p>
+<p>UDP则为应用层提供一种非常简单的服务。它只是把称作数据报的分组从一台主机发送到另一台主机，但并不保证该数据报能到达另一端。一个数据报是指从发送方传输到接收方的一个信息单元（例如，发送方指定的一定字节数的信息）。UDP协议任何必需的可靠性必须由应用层来提供。</p>
+<h4 id="4-应用层"><a href="/2019/10/24/HTTP_Comprehensive/#4-应用层" class="headerlink" title="(4). 应用层"></a>(4). 应用层</h4><p>应用层决定了向用户提供应用服务时通信的活动。TCP/IP 协议族内预存了各类通用的应用服务。包括 HTTP，FTP（File Transfer Protocol，文件传输协议），DNS（Domain Name System，域名系统）服务。</p>
+<p>数据包进入到每一个层，都会被加上相应的头部，各层的协议就是数据包头部的规范，是统一的数据包结构说明。</p>
+<ul>
+<li><p>包可以说是全能性术语；</p>
+</li>
+<li><p>帧用于表示数据链路层中包的单位；</p>
+</li>
+<li><p>数据包是 IP 和 UDP 等网络层以上的分层中包的单位；</p>
+</li>
+<li><p>段则表示 TCP 数据流中的信息；</p>
+</li>
+<li><p>消息是指应用协议中数据的单位</p>
+</li>
+</ul>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219026590.jpg" alt></p>
+<p>  从TCP/IP模型的角度来理解了一次HTTP请求与响应的过程</p>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219035899.jpg" alt></p>
+<p>  下面再看上面的的；流程是如何一步一步完成的，各个层分别做了什么作用。</p>
+<h3 id="1-3-TCP三次握手"><a href="/2019/10/24/HTTP_Comprehensive/#1-3-TCP三次握手" class="headerlink" title="1.3 TCP三次握手"></a>1.3 TCP三次握手</h3><p>  HTTP基本都是基于TCP的，TCP是面向连接的，无论哪一方向另一方发送数据之前，都必须先在双方之间建立一条连接。在TCP/IP协议中，TCP协议提供可靠的连接服务，连接是通过三次握手进行初始化的。三次握手的目的是同步连接双方的序列号和确认号并交换 TCP窗口大小信息。</p>
+<p> <img src="/2019/10/24/HTTP_Comprehensive/1562219042615.jpg" alt></p>
+<ul>
+<li><p>第一次握手：建立连接。客户端发送连接请求报文段，将SYN位置为1，Sequence Number为x；然后，客户端进入SYN_SEND状态，等待服务器的确认；</p>
+</li>
+<li><p>第二次握手：服务器收到SYN报文段。服务器收到客户端的SYN报文段，需要对这个SYN报文段进行确认，设置Acknowledgment Number为x+1(Sequence Number+1)；同时，自己自己还要发送SYN请求信息，将SYN位置为1，Sequence Number为y；服务器端将上述所有信息放到一个报文段（即SYN+ACK报文段）中，一并发送给客户端，此时服务器进入SYN_RECV状态；</p>
+</li>
+<li><p>第三次握手：客户端收到服务器的SYN+ACK报文段。然后将Acknowledgment Number设置为y+1，向服务器发送ACK报文段，这个报文段发送完毕以后，客户端和服务器端都进入ESTABLISHED状态，完成TCP三次握手。</p>
+</li>
+</ul>
+<p><em>为什么要三次握手</em> </p>
+<p>为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误：</p>
+<p><strong>具体例子：</strong>“已失效的连接请求报文段”的产生在这样一种情况下：client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server。本来这是一个早已失效的报文段。但server收到此失效的连接请求报文段后，就误认为是client再次发出的一个新的连接请求。于是就向client发出确认报文段，同意建立连接。假设不采用“三次握手”，那么只要server发出确认，新的连接就建立了。由于现在client并没有发出建立连接的请求，因此不会理睬server的确认，也不会向server发送数据。但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。采用“三次握手”的办法可以防止上述现象发生。例如刚才那种情况，client不会向server的确认发出确认。server由于收不到确认，就知道client并没有要求建立连接。”</p>
+<h3 id="1-4-HTTP协议"><a href="/2019/10/24/HTTP_Comprehensive/#1-4-HTTP协议" class="headerlink" title="1.4 HTTP协议"></a>1.4 HTTP协议</h3><h4 id="Http是什么？"><a href="/2019/10/24/HTTP_Comprehensive/#Http是什么？" class="headerlink" title="Http是什么？"></a>Http是什么？</h4><p>通俗来讲，他就是计算机通过网络进行通信的规则，是一个基于请求与响应，无状态的，应用层的协议，常基于TCP/IP协议传输数据。目前任何终端（手机，笔记本电脑。。）之间进行任何一种通信都必须按照Http协议进行，否则无法连接。</p>
+<p><strong>四个基于：</strong></p>
+<p><strong>请求与响应：</strong> 客户端发送请求，服务器端响应数据</p>
+<p><strong>无状态的：</strong> 协议对于事务处理没有记忆能力，客户端第一次与服务器建立连接发送请求时需要进行一系列的安全认证匹配等，因此增加页面等待时间，当客户端向服务器端发送请求，服务器端响应完毕后，两者断开连接，也不保存连接状态，一刀两断！恩断义绝！从此路人！下一次客户端向同样的服务器发送请求时，由于他们之前已经遗忘了彼此，所以需要重新建立连接。</p>
+<p><strong>应用层：</strong> Http是属于应用层的协议，配合TCP/IP使用。</p>
+<p><strong>TCP/IP：</strong> Http使用TCP作为它的支撑运输协议。HTTP客户机发起一个与服务器的TCP连接，一旦连接建立，浏览器（客户机）和服务器进程就可以通过套接字接口访问TCP。</p>
+<p><strong>针对无状态的一些解决策略：</strong></p>
+<p>有时需要对用户之前的HTTP通信状态进行保存，比如执行一次登陆操作，在30分钟内所有的请求都不需要再次登陆。于是引入了Cookie技术。</p>
+<p>HTTP/1.1想出了持久连接（HTTP keep-alive）方法。其特点是，只要任意一端没有明确提出断开连接，则保持TCP连接状态，在请求首部字段中的Connection: keep-alive即为表明使用了持久连接。<br>等等还有很多。。。。。。</p>
+<p>下面开始讲解重头戏：HTTP请求报文，响应报文，对应于上述步骤的2，3，4，5，6。</p>
+<p>HTTP报文是面向文本的，报文中的每一个字段都是一些ASCII码串，各个字段的长度是不确定的。HTTP有两类报文：请求报文和响应报文。</p>
+<h4 id="HTTP请求报文"><a href="/2019/10/24/HTTP_Comprehensive/#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h4><p>一个HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据4个部分组成，下图给出了请求报文的一般格式。</p>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219058948.jpg" alt></p>
+<p>请求行分为三个部分：请求方法、请求地址和协议版本</p>
+<p><strong>1. 请求方法</strong></p>
+<p>HTTP/1.1 定义的请求方法有8种：GET、POST、PUT、DELETE、PATCH、HEAD、OPTIONS、TRACE</p>
+<p> <strong>2.请求头部</strong></p>
+<p>请求头部为请求报文添加了一些附加信息，由“名/值”对组成，每行一对，名和值之间使用冒号分隔。</p>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219067839.jpg" alt><br>下面是http response包的一些结构具体的可以参照下面的实例</p>
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219074748.jpg" alt><br><strong>http response的结构实例</strong></p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK　　状态行</span><br><span class="line"></span><br><span class="line">Date: Sun, 17 Mar 2017 08:12:54 GMT　　响应头部</span><br><span class="line"></span><br><span class="line">Server: Apache/2.2.8 (Win32) PHP/5.2.5</span><br><span class="line"></span><br><span class="line">X-Powered-By: PHP/5.2.5</span><br><span class="line"></span><br><span class="line">Set-Cookie: PHPSESSID=c0huq7pdkmm5gg6osoe3mgjmm3; path=/</span><br><span class="line"></span><br><span class="line">Expires: Thu, 19 Nov 1981 08:52:00 GMT</span><br><span class="line"></span><br><span class="line">Cache-Control: no-store, no-cache, must-revalidate, post-check=0,pre-check=0</span><br><span class="line"></span><br><span class="line">Pragma: no-cache</span><br><span class="line"></span><br><span class="line">Content-Length: 4393</span><br><span class="line"></span><br><span class="line">Keep-Alive: timeout=5, max=100</span><br><span class="line"></span><br><span class="line">Connection: Keep-Alive</span><br><span class="line"></span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line"></span><br><span class="line">空行</span><br><span class="line"></span><br><span class="line"><html>　　响应数据</html></span><br><span class="line"></span><br><span class="line"><head></head></span><br><span class="line"></span><br><span class="line"><title>HTTP响应示例<title></title></title></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><body></body></span><br><span class="line"></span><br><span class="line">Hello HTTP!</span><br><span class="line"></span><br><span class="line"></span></pre></td></tr></tbody></table></figure></body><br><span class="line"></span><br><span class="line"></span></html><br>
+
+<p><strong>下面是python脚本，利用scapy模块库，生成数据包，建立tcp三次握手，传输http报文的代码</strong></p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#! /usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment"># Change log level to suppress annoying IPv6 error</span></span><br><span class="line"><span class="hljs-keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="hljs-string">"scapy.runtime"</span>).setLevel(logging.ERROR)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Import scapy</span></span><br><span class="line"><span class="hljs-keyword">from</span> scapy.all <span class="hljs-keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Print info header</span></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">"[*] ACK-GET example -- Thijs 'Thice' Bosschert, 06-06-2011"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Prepare GET statement</span></span><br><span class="line">get = <span class="hljs-string">'GET / HTTP/1.1\r\nHost:49.234.82.163\r\nUser-Agent:python/2.7\r\nAccept:*/*\r\n\r\n'</span></span><br><span class="line"><span class="hljs-comment"># Set up target IP</span></span><br><span class="line">ip=IP(dst=<span class="hljs-string">"49.234.82.163"</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Generate random source port number</span></span><br><span class="line">port=RandNum(<span class="hljs-number">1024</span>,<span class="hljs-number">65535</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Create SYN packet</span></span><br><span class="line">SYN=ip/TCP(sport=port, dport=<span class="hljs-number">80</span>, flags=<span class="hljs-string">"S"</span>, seq=<span class="hljs-number">42</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Send SYN and receive SYN,ACK</span></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">"\n[*] Sending SYN packet"</span></span><br><span class="line">SYNACK=sr1(SYN)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Create ACK with GET request</span></span><br><span class="line">ACK=ip/TCP(sport=SYNACK.dport, dport=<span class="hljs-number">80</span>, flags=<span class="hljs-string">"A"</span>, seq=SYNACK.ack,</span><br><span class="line">ack=SYNACK.seq + <span class="hljs-number">1</span>) </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># SEND our ACK-GET request</span></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">"\n[*] Sending ACK-GET packet"</span></span><br><span class="line">send(ACK)</span><br><span class="line"></span><br><span class="line">reply,error=sr(ip/TCP(sport=SYNACK.dport, dport=<span class="hljs-number">80</span>, flags=<span class="hljs-string">"PA"</span>, seq=SYNACK.ack,ack=SYNACK.seq + <span class="hljs-number">1</span>)/get)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># print reply from server</span></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">"\n[*] Reply from server:"</span></span><br><span class="line"><span class="hljs-keyword">print</span> reply.show()</span><br><span class="line"><span class="hljs-keyword">print</span> reply[<span class="hljs-number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">'\n[*] Done!'</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以用抓包的wireshark发现服务器端有回复ok，也可以用sniff（）来嗅探，</p>
+<figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中iface因电脑而异的，然后可以看到如下所示，具体的是哪一个索引也跟目前电脑运行的状态有关，可以多输出几个试试</span><br><span class="line"></span><br><span class="line">但是握手过程可能会因为tcp的RST而导致握手失败，只主要是linux内核收到ack时，认为自己并没有发出SYN，所以发出RST，重置连接，需要配置iptable过滤掉RST的包，下面的IP为clinet端的ip</span><br><span class="line">```iptables -A OUTPUT -p tcp --tcp-flags RST RST -s 192.168.1.20 -j DROP</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img src="/2019/10/24/HTTP_Comprehensive/1562219087505.png" alt></p>
+<h2 id="2-http-url-amp-p4存在的问题"><a href="#2-http-url-amp-p4存在的问题" class="headerlink" title="2. http/url & p4存在的问题"></a>2. http/url & p4存在的问题</h2><ul>
+<li>http面向连接的，是需要占用端口的，如果实现的话，需要实现tcp层的功能</li>
+<li>http的<strong>request和response不是一一对应关系</strong>，而且他们的对应序列也可以按照网络不同而不同，这由传输层来帮忙完成，需要找到对应关系？？？<strong>从抓包的结果来看：一对会话的ack、seq和tcp length有关的即ack = seq + tcp_length；其中seq就等于上一次发过来的ack或者随机也可以</strong></li>
+<li>http的response可以是单个数据包，也可以是多个，可以考虑单个的小的响应包</li>
+</ul>
+
+        </div>
+
+        
+        <ul class="post-copyright">
+        <li><strong>本文标题：</strong><a href="https://fengww2014.github.io/2019/10/24/HTTP_Comprehensive/">HTTP全解</a></li>
+        <li><strong>本文作者：</strong><a href="https://fengww2014.github.io">Fengww</a></li>
+        <li><strong>本文链接：</strong><a href="https://fengww2014.github.io/2019/10/24/HTTP_Comprehensive/">https://fengww2014.github.io/2019/10/24/HTTP_Comprehensive/</a></li>
+        <li><strong>发布时间：</strong>2019-10-24</li>
+        <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
+        </li>
+        </ul>
+    
+
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/http/">http</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>Alipay</span>
+    <div class="qrcode"><img src="/images/zfb.jpg" alt="Alipay"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>Wechat</span>
+    <div class="qrcode"><img src="/images/wechat.png" alt="Wechat"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/24/P4_data_plane_lang/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">P4_lang</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/P4app_Docker/">
+                <span class="level-item">P4app-docker</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: false,
+        app_id: 'OKSks70kWKdXwFM1JjY8N3kV-gzGzoHsz',
+        app_key: 'PEGLEFFvs7Ddbs8USdkMbx89',
+        placeholder: 'Say something...'
+    });
+</script>
+
+    </div>
+</div>
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-4-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="冯少侠在江湖">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯少侠在江湖
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        孤独的风中一匹狼
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>HeFei, China, USTC</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Fengww2014" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/Fengww2014">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget column-left is-sticky" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-用scapy实现http请求全流程">
+        <span class="has-mr-6">1</span>
+        <span>1. 用scapy实现http请求全流程</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-http请求和响应的全流程">
+        <span class="has-mr-6">1.1</span>
+        <span>1.1 http请求和响应的全流程</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-TCP-IP协议">
+        <span class="has-mr-6">1.2</span>
+        <span>1.2 TCP/IP协议</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-链路层">
+        <span class="has-mr-6">1.2.1</span>
+        <span>(1). 链路层</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-网络层">
+        <span class="has-mr-6">1.2.2</span>
+        <span>(2). 网络层</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-传输层">
+        <span class="has-mr-6">1.2.3</span>
+        <span>(3). 传输层</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-应用层">
+        <span class="has-mr-6">1.2.4</span>
+        <span>(4). 应用层</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#1-3-TCP三次握手">
+        <span class="has-mr-6">1.3</span>
+        <span>1.3 TCP三次握手</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-4-HTTP协议">
+        <span class="has-mr-6">1.4</span>
+        <span>1.4 HTTP协议</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Http是什么？">
+        <span class="has-mr-6">1.4.1</span>
+        <span>Http是什么？</span>
+        </a></li><li>
+        <a class="is-flex" href="#HTTP请求报文">
+        <span class="has-mr-6">1.4.2</span>
+        <span>HTTP请求报文</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#2-http-url-amp-p4存在的问题">
+        <span class="has-mr-6">2</span>
+        <span>2. http/url & p4存在的问题</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.ico" alt="HTTP全解" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Fengww&nbsp;
+                Powered &#10084; Feng · Weiwei
+                </p>
+            </div>
+            
+
+            
+            <div class="level-end">
+
+
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("10/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+        </div>
+        </div>
+
+    </div>
+
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+</body>
+</html>

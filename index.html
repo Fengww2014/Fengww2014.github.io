@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<script src="/js/src/click.js"></script>
+<html  lang="en">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>Feng-Blog</title>
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Feng-Blog">
+<meta property="og:url" content="https://fengww2014.github.io/index.html">
+<meta property="og:site_name" content="Feng-Blog">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://fengww2014.github.io/images/og_image.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Feng-Blog">
+<meta name="twitter:image" content="https://fengww2014.github.io/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.ico" alt="Feng-Blog" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item is-active"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/24/P4_tutorials/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?dataplane" alt="P4_tutorials">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.905Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1507 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/P4_tutorials/">P4_tutorials</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p><strong>😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。</strong></p>
+<h1 id="p4语言的执行流程"><a href="/2019/10/24/P4_tutorials/#p4语言的执行流程" class="headerlink" title="p4语言的执行流程"></a>p4语言的执行流程</h1><p>  官方的教程demo中仅给出的是v1model的target转发模型，P4_16和P4_14都支持这种转发模型，所以我的实验和理解都是基于这种转发模型的。v1model模型图和p4程序的顺序结构如下图所示：<br><img src="/2019/10/24/P4_tutorials/1562848188244.png" alt><br><img src="/2019/10/24/P4_tutorials/1562848194541.png" alt><br>  所以呢执行的顺序可以清楚的看出来。</p>
+<h2 id="parse状态机的理解"><a href="/2019/10/24/P4_tutorials/#parse状态机的理解" class="headerlink" title="parse状态机的理解"></a>parse状态机的理解</h2><p>  但是针对parse这一环节，我一度很困扰，因为我一直想解析一个不定长的header，但是一直找不到案例，而且在p4_16的语言规范的文档中，提供了一种变长的header结构，但是前提是你得事前知道有多长，类似于ipv4的length字段，尽管ipv4有option字段，但是length字段又明确了长度，所以p4的变长header也是这种机制。但是这对我于p4的header解析，有了一个认识的契机，本来我一直以为这个解析和结构之间的声明顺序有很大的关系，结果，😀发现这个和华为提出的pof架构很类似都是利用偏移来做的解析，只不过p4语言更加高级，你不能从代码上看出偏移，但是本质还是偏移，比如下面这个数据包，（这是用scapy发出的数据包🐍）。</p></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/24/P4_tutorials/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/24/P4_data_plane_lang/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?P4lang" alt="P4_lang">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.899Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 674 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/P4_data_plane_lang/">P4_lang</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h2 id="p4语言简介"><a href="/2019/10/24/P4_data_plane_lang/#p4语言简介" class="headerlink" title="p4语言简介"></a>p4语言简介</h2><p>P4(Programming Protocol-Independent Packet Processors) 是一种数据面的高级编程语言。数据面编程就是我们自定义匹配字段 ，自定义动作类型  ， 从而自定义流表 ，进而形成流水线。p4不仅可以对数据流进行转发，还可以对交换机等转发设备的数据处理流程进行软件编程定义。p4语言实现的交换机架构如下图<br><img src="/2019/10/24/P4_data_plane_lang/1561476867994.png" alt></p>
+<h2 id="p4语言特点"><a href="/2019/10/24/P4_data_plane_lang/#p4语言特点" class="headerlink" title="p4语言特点"></a>p4语言特点</h2><p>p4的几个需要注意的点：</p>
+<ul>
+<li>可以实现现有协议的转发功能</li>
+<li>可以自定义数据包结构</li>
+<li>可以在现有协议的基础上进行新的功能开发</li>
+<li>SW 风格开发——协议和转发的开发模式类似于软件开发</li></ul></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/24/P4_data_plane_lang/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/24/HTTP_Comprehensive/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?HTTP" alt="HTTP全解">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/http/">http</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    25 minutes read (About 3704 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/HTTP_Comprehensive/">HTTP全解</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>http是目前访问网页最主流的应用层协议，但是对于http应用层和下面的传输层之间的关系，一直不是特别的清楚，遂就本文对http协议从网络层次的角度来仔细剖析，并写了python脚本试图复原整个的http请求全流程。</p>
+<h2 id="1-用scapy实现http请求全流程"><a href="#1-用scapy实现http请求全流程" class="headerlink" title="1. 用scapy实现http请求全流程"></a>1. 用scapy实现http请求全流程</h2><h3 id="1-1-http请求和响应的全流程"><a href="#1-1-http请求和响应的全流程" class="headerlink" title="1.1 http请求和响应的全流程"></a>1.1 http请求和响应的全流程</h3><p><img src="/2019/10/24/HTTP_Comprehensive/1562218975750.jpg" alt><br>主要的步骤包括建立连接、http request和response交互、关闭连接等，下面逐一讲解。</p>
+<h3 id="1-2-TCP-IP协议"><a href="/2019/10/24/HTTP_Comprehensive/#1-2-TCP-IP协议" class="headerlink" title="1.2 TCP/IP协议"></a>1.2 TCP/IP协议</h3><p>TCP/IP协议模型（Transmission Control Protocol/Internet Protocol），包含了一系列构成互联网基础的网络协议，是Internet的核心协议，通过20多年的发展已日渐成熟，并被广泛应用于局域网和广域网中（<em>如果局域网是小溪，很多条小溪就汇聚成大的干流，比如长江、黄河，干流就是广域网，然后再流入大海，大海就是互联网</em>），目前已成为事实上的国际标准。TCP/IP协议簇是一组不同层次上的多个协议的组合，通常被认为是一个四层协议系统，与OSI的七层模型相对应。</p></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/24/HTTP_Comprehensive/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/24/P4app_Docker/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?docker" alt="P4app-docker">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 750 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/P4app_Docker/">P4app-docker</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h1 id="介绍p4app"><a href="/2019/10/24/P4app_Docker/#介绍p4app" class="headerlink" title="介绍p4app"></a>介绍p4app</h1><p>p4app是一个可以构建、运行、调试和测试P4程序的工具，p4app背后蕴含的哲学是“简单的事情应尽可能简单”，旨在使小而简单的P4程序易于编写、易于与他人分享。这个工具站的角度比较高，忽略了底层的一些配置，让用户了解p4的门槛变低，直接开始设计p4程序。👌</p>
+<h1 id="p4lang-p4app的镜像结构"><a href="/2019/10/24/P4app_Docker/#p4lang-p4app的镜像结构" class="headerlink" title="p4lang/p4app的镜像结构"></a>p4lang/p4app的镜像结构</h1><p>Docker 镜像是分层结构以Ubuntu 16.04为base镜像依次构建，p4app为最顶层.<br>对于如何构建这些镜像，有兴趣的可以看p4app的Dockerfile.💪</p>
+<ul>
+<li>p4app</li>
+<li>p4c</li>
+<li>pi</li>
+<li>bmv2</li>
+<li>third-party</li>
+<li>ubuntu：16.04</li></ul></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/24/P4app_Docker/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/24/hello-world/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?cartoon" alt="Hello World">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a minute read (About 122 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/24/hello-world/">Hello World</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="/2019/10/24/hello-world/#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="/2019/10/24/hello-world/#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/24/hello-world/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/17/virtualbox-build-topo/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?network" alt="virtualbox-build-topo">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-16T22:22:01.000Z">2019-10-17</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/networks/">networks</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 413 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/17/virtualbox-build-topo/">virtualbox-build-topo</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h1 id="多台虚拟机搭建网络拓扑"><a href="/2019/10/17/virtualbox-build-topo/#多台虚拟机搭建网络拓扑" class="headerlink" title="多台虚拟机搭建网络拓扑"></a>多台虚拟机搭建网络拓扑</h1><p>利用多台虚拟机搭建彼此之间的拓扑关系，进行一些试验，而不限于实际交换设备数量的限制。</p>
+<ul>
+<li><p>在virtualbox软件上创建多台虚拟机，我用三个来试验，两台作为主机，一台作为路由</p>
+</li>
+<li><p>进行两台主机的网络配置</p>
+</li>
+<li><p>配置路由器</p></li></ul></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/17/virtualbox-build-topo/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/10/python-loop-break/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?Python" alt="python_loop_break">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-10T05:14:53.000Z">2019-10-10</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 276 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/10/python-loop-break/">python_loop_break</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>本文总结python 语言定时跳出循环的方案，主要分为两种情况：</p>
+<ul>
+<li>循环中无阻塞的可能<br>这种情况比较简单，可以直接用时间差的判断是否跳出即可：<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t_end = time.time() + <span class="hljs-number">60</span> * <span class="hljs-number">15</span></span><br><span class="line"><span class="hljs-keyword">while</span> time.time() < t_end:</span><br><span class="line">    <span class="hljs-comment"># do whatever you do但是必须保证不存在阻塞的可能</span></span><br></pre></td></tr></tbody></table></figure>
+
+</li>
+</ul></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/10/python-loop-break/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/10/icarus-configure/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?Blog" alt="icarus_configure">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-09T18:11:26.000Z">2019-10-10</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1280 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/10/icarus-configure/">icarus_configure</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>自定义icarus主题的配置，使个人博客看起来很舒服。</p>
+<h2 id="雪花特效"><a href="/2019/10/10/icarus-configure/#雪花特效" class="headerlink" title="雪花特效"></a>雪花特效</h2></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/10/icarus-configure/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/09/note/" class="image is-7by1">
+            <img class="thumbnail" src="http://img007.hc360.cn/y1/M03/D5/FA/wKhQc1TLGYmEcbHmAAAAAODp6Jg943.jpg" alt="note">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-08T23:57:04.000Z">2019-10-09</time>
+                <!-- 
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Others/">Others</a>
+                </div>
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 363 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/09/note/">note</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h4 id="投资-理财-金钱"><a href="/2019/10/09/note/#投资-理财-金钱" class="headerlink" title="投资/理财/金钱"></a>投资/理财/金钱</h4><p>**  最宝贵的金融资产就是赚钱的本领 **</p>
+<ul>
+<li>财富阅读</li>
+<li>这天学到了</li>
+<li>这天记账了么</li>
+<li>这天的思考</li>
+</ul>
+<h4 id="梦想-创意-灵感-成绩-错误"><a href="/2019/10/09/note/#梦想-创意-灵感-成绩-错误" class="headerlink" title="梦想/创意/灵感/成绩/错误"></a>梦想/创意/灵感/成绩/错误</h4><p>**  建立灯塔与修正方向的地方    **</p>
+<ul>
+<li>今天我要尝试的是</li>
+<li>做本月总结     </li>
+<li>灵感涂鸭</li>
+<li>昨天的进步是</li>
+<li>昨天的不足是</li>
+<li><ul>
+<li>每天向前走一步，Think Big Do Small       **</li>
+</ul>
+</li>
+</ul></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/09/note/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/10/09/test-math/" class="image is-7by1">
+            <img class="thumbnail" src="https://source.unsplash.com/random" alt="test_math">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-08T23:38:08.000Z">2019-10-09</time>
+                <!-- 
+                
+                -->
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    a few seconds read (About 1 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/10/09/test-math/">test_math</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body></body></html>
+        </div>
+
+        
+
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/10/09/test-math/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.png" alt="冯少侠在江湖">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        冯少侠在江湖
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        孤独的风中一匹狼
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>HeFei, China, USTC</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        10
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        6
+                    </p>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/Fengww2014" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/Fengww2014">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Hexo/">
+            <span class="level-start">
+                <span class="level-item">Hexo</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Others/">
+            <span class="level-start">
+                <span class="level-item">Others</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/P4/">
+            <span class="level-start">
+                <span class="level-item">P4</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Python/">
+            <span class="level-start">
+                <span class="level-item">Python</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/http/">
+            <span class="level-start">
+                <span class="level-item">http</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/networks/">
+            <span class="level-start">
+                <span class="level-item">networks</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/Hexo/" style="font-size: 20px;">Hexo</a> <a href="/tags/P4/" style="font-size: 20px;">P4</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/networks/" style="font-size: 10px;">networks</a> <a href="/tags/晨间日记/" style="font-size: 10px;">晨间日记</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4_tutorials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?dataplane" alt="P4_tutorials">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.905Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4_tutorials/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4_tutorials</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4_data_plane_lang/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?P4lang" alt="P4_lang">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.899Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4_data_plane_lang/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4_lang</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/HTTP_Comprehensive/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?HTTP" alt="HTTP全解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/HTTP_Comprehensive/" class="title has-link-black-ter is-size-6 has-text-weight-normal">HTTP全解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/http/">http</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4app_Docker/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?docker" alt="P4app-docker">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4app_Docker/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4app-docker</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?cartoon" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/P4/">
+                        <span class="tag">P4</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/networks/">
+                        <span class="tag">networks</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/晨间日记/">
+                        <span class="tag">晨间日记</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4_tutorials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?dataplane" alt="P4_tutorials">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.905Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4_tutorials/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4_tutorials</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4_data_plane_lang/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?P4lang" alt="P4_lang">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.899Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4_data_plane_lang/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4_lang</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/HTTP_Comprehensive/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?HTTP" alt="HTTP全解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/HTTP_Comprehensive/" class="title has-link-black-ter is-size-6 has-text-weight-normal">HTTP全解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/http/">http</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/P4app_Docker/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?docker" alt="P4app-docker">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/P4app_Docker/" class="title has-link-black-ter is-size-6 has-text-weight-normal">P4app-docker</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/P4/">P4</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/10/24/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://source.unsplash.com/1600x900/?cartoon" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-10-23T16:48:53.894Z">2019-10-24</time></div>
+                    <a href="/2019/10/24/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Hexo/">Hexo</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">10</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Hexo/">
+                        <span class="tag">Hexo</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/P4/">
+                        <span class="tag">P4</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python/">
+                        <span class="tag">Python</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/networks/">
+                        <span class="tag">networks</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/晨间日记/">
+                        <span class="tag">晨间日记</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.ico" alt="Feng-Blog" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Fengww&nbsp;
+                Powered &#10084; Feng · Weiwei
+                </p>
+            </div>
+            
+
+            
+            <div class="level-end">
+
+
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("10/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+        </div>
+        </div>
+
+    </div>
+
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+    <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+</body>
+</html>
