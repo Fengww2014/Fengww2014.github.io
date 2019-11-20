@@ -8,23 +8,20 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>python_loop_break - Feng-Blog</title>
+<title>P4 Runtime 初步使用 - Feng-Blog</title>
 
 
-    <meta name="description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
-<meta name="keywords" content="Python">
+    <meta name="keywords" content="P4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python_loop_break">
-<meta property="og:url" content="https://fengww2014.github.io/2019/10/10/python-loop-break/index.html">
+<meta property="og:title" content="P4 Runtime 初步使用">
+<meta property="og:url" content="https://fengww2014.github.io/2019/11/20/P4Runtime初步使用/index.html">
 <meta property="og:site_name" content="Feng-Blog">
-<meta property="og:description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://source.unsplash.com/1600x900/?Python">
-<meta property="og:updated_time" content="2019-10-23T16:48:53.899Z">
+<meta property="og:image" content="https://source.unsplash.com/1600x900/?P4,IP">
+<meta property="og:updated_time" content="2019-11-20T11:13:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python_loop_break">
-<meta name="twitter:description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
-<meta name="twitter:image" content="https://source.unsplash.com/1600x900/?Python">
+<meta name="twitter:title" content="P4 Runtime 初步使用">
+<meta name="twitter:image" content="https://source.unsplash.com/1600x900/?P4,IP">
 
 
 
@@ -84,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.ico" alt="python_loop_break" height="28">
+                <img src="/images/logo.ico" alt="P4 Runtime 初步使用" height="28">
             
             </a>
         </div>
@@ -142,7 +139,7 @@
     
     <div class="card-image">
         <span  class="image is-7by1">
-            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?Python" alt="python_loop_break">
+            <img class="thumbnail" src="https://source.unsplash.com/1600x900/?P4,IP" alt="P4 Runtime 初步使用">
         </span>
     </div>
     
@@ -150,11 +147,11 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-10T05:14:53.000Z">2019-10-10</time>
+                <time class="level-item has-text-grey" datetime="2019-11-20T11:13:17.000Z">2019-11-20</time>
                 <!-- 
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Python/">Python</a>
+                <a class="has-link-grey -link" href="/categories/networks/">networks</a>
                 </div>
                 
                 -->
@@ -162,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 276 words)
+                    2 minutes read (About 343 words)
                 </span>
                 
                 
@@ -176,32 +173,29 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                python_loop_break
+                P4 Runtime 初步使用
             
         </h1>
         <div class="content">
-            <html><head></head><body><p>本文总结python 语言定时跳出循环的方案，主要分为两种情况：</p>
-<ul>
-<li>循环中无阻塞的可能<br>这种情况比较简单，可以直接用时间差的判断是否跳出即可：<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t_end = time.time() + <span class="hljs-number">60</span> * <span class="hljs-number">15</span></span><br><span class="line"><span class="hljs-keyword">while</span> time.time() < t_end:</span><br><span class="line">    <span class="hljs-comment"># do whatever you do但是必须保证不存在阻塞的可能</span></span><br></pre></td></tr></tbody></table></figure>
-
+            <html><head></head><body><p> <strong>P4Runtime是P4的一个控制面的协议，也叫南向协议，用于下发流表、规则等作用</strong>，但是P4一般提供了<a href="https://github.com/p4lang/PI" target="_blank" rel="noopener">PCI</a>这一个模块来修改流表等静态存储，这些模块对于需求往往不够，所以本文记录一下如何使用P4Runtime来从控制面读、写、改一些静态的流表、register、counter等。 </p>
+<ol>
+<li><p>首先cd到<code>/behavioral-model/tools</code>文件下面，看到目录下有一个<code>runtime_CLI.py</code>,这个文件就是我们用来修改的文件。这个文件本来的功能就是CLI的命令循环，我们可以立足于它做一些自定义的动作，而不需要在CLI的命令行输入，只需要运行一个python脚本就可以了。 </p>
 </li>
-</ul>
-<a id="more"></a>
-<ul>
-<li>循环中可能会发生阻塞<br>这种就比较复杂，因为可能循环会阻塞在特定的语句，所以无法用上面的方法来实现，<br>必须要另开一线程来使循环线程和计时判断线程同时进行，这样就不会有阻碍了。下面的<br>代码是我查资料采取的方案：<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process</span><br><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">task</span><span class="hljs-params">(msg)</span>:</span></span><br><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:</span><br><span class="line">    	<span class="hljs-keyword">print</span> (<span class="hljs-string">'hello, %s'</span> % msg)</span><br><span class="line">    	time.sleep(<span class="hljs-number">1</span>)</span><br><span class="line">    	<span class="hljs-keyword">pass</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line">    p = Process(target=task, args=(<span class="hljs-string">'world'</span>,))</span><br><span class="line"></span><br><span class="line">    p.start()</span><br><span class="line">    p.join(<span class="hljs-number">0.15</span>)</span><br><span class="line">    <span class="hljs-keyword">if</span> p.is_alive():</span><br><span class="line">        print(<span class="hljs-string">'Process: %s is running'</span> % p.pid)</span><br><span class="line">        p.terminate()</span><br></pre></td></tr></tbody></table></figure>
+<li><p>runtime_CLI.py里面把所有的API都写在了class RuntimeAPI里面了。而在主程序里面只写了一句</p>
+<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RuntimeAPI(args.pre, standard_client, mc_client).cmdloop()</span><br></pre></td></tr></tbody></table></figure>
 
+<p>所以我们可以在class RuntimeAPI中自己定义一个函数，函数中调用不同的动作组合，然后在主程序里调用这个成员函数就可以实现运行自己规定的那些动作了，而这些动作怎么组合根据个人的需要即可。</p>
 </li>
-</ul>
-<p>尽管这个task中的循环不包括阻塞的可能，但是这段代码是可以完全应对发生阻塞的情况。</p>
+</ol>
 </body></html>
         </div>
 
         
         <ul class="post-copyright">
-        <li><strong>本文标题：</strong><a href="https://fengww2014.github.io/2019/10/10/python-loop-break/">python_loop_break</a></li>
+        <li><strong>本文标题：</strong><a href="https://fengww2014.github.io/2019/11/20/P4Runtime初步使用/">P4 Runtime 初步使用</a></li>
         <li><strong>本文作者：</strong><a href="https://fengww2014.github.io">Fengww</a></li>
-        <li><strong>本文链接：</strong><a href="https://fengww2014.github.io/2019/10/10/python-loop-break/">https://fengww2014.github.io/2019/10/10/python-loop-break/</a></li>
-        <li><strong>发布时间：</strong>2019-10-10</li>
+        <li><strong>本文链接：</strong><a href="https://fengww2014.github.io/2019/11/20/P4Runtime初步使用/">https://fengww2014.github.io/2019/11/20/P4Runtime初步使用/</a></li>
+        <li><strong>发布时间：</strong>2019-11-20</li>
         <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </li>
         </ul>
@@ -212,7 +206,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Python/">Python</a>
+                    <a class="has-link-grey -link" href="/tags/P4/">P4</a>
                 </div>
             </div>
         </div>
@@ -258,17 +252,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/17/virtualbox-build-topo/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">virtualbox-build-topo</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/10/icarus-configure/">
-                <span class="level-item">icarus_configure</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/20/P4-Controller/">
+                <span class="level-item">P4-Controller</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -448,7 +435,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.ico" alt="python_loop_break" height="28">
+                    <img src="/images/logo.ico" alt="P4 Runtime 初步使用" height="28">
                 
                 </a>
                 <p class="is-size-7">
