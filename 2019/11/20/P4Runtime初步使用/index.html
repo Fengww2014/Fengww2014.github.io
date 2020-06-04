@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="Feng-Blog">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://source.unsplash.com/1600x900/?P4,IP">
-<meta property="og:updated_time" content="2019-11-20T11:13:17.000Z">
+<meta property="og:updated_time" content="2020-06-04T16:22:19.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="P4 Runtime 初步使用">
 <meta name="twitter:image" content="https://source.unsplash.com/1600x900/?P4,IP">
@@ -159,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 343 words)
+                    2 minutes read (About 344 words)
                 </span>
                 
                 
@@ -177,7 +177,9 @@
             
         </h1>
         <div class="content">
-            <html><head></head><body><p> <strong>P4Runtime是P4的一个控制面的协议，也叫南向协议，用于下发流表、规则等作用</strong>，但是P4一般提供了<a href="https://github.com/p4lang/PI" target="_blank" rel="noopener">PCI</a>这一个模块来修改流表等静态存储，这些模块对于需求往往不够，所以本文记录一下如何使用P4Runtime来从控制面读、写、改一些静态的流表、register、counter等。 </p>
+            <html><head></head><body><a id="more"></a>
+
+<p><strong>P4Runtime是P4的一个控制面的协议，也叫南向协议，用于下发流表、规则等作用</strong>，但是P4一般提供了<a href="https://github.com/p4lang/PI" target="_blank" rel="noopener">PCI</a>这一个模块来修改流表等静态存储，这些模块对于需求往往不够，所以本文记录一下如何使用P4Runtime来从控制面读、写、改一些静态的流表、register、counter等。 </p>
 <ol>
 <li><p>首先cd到<code>/behavioral-model/tools</code>文件下面，看到目录下有一个<code>runtime_CLI.py</code>,这个文件就是我们用来修改的文件。这个文件本来的功能就是CLI的命令循环，我们可以立足于它做一些自定义的动作，而不需要在CLI的命令行输入，只需要运行一个python脚本就可以了。 </p>
 </li>

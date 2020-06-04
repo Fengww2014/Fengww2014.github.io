@@ -164,7 +164,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 343 words)
+                    2 minutes read (About 344 words)
                 </span>
                 
                 
@@ -229,7 +229,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 346 words)
+                    2 minutes read (About 347 words)
                 </span>
                 
                 
@@ -307,9 +307,7 @@
             
         </h1>
         <div class="content">
-            <html><head></head><body><p><strong>😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。</strong></p>
-<h1 id="p4语言的执行流程"><a href="/2019/10/24/P4_tutorials/#p4语言的执行流程" class="headerlink" title="p4语言的执行流程"></a>p4语言的执行流程</h1><p>  官方的教程demo中仅给出的是v1model的target转发模型，P4_16和P4_14都支持这种转发模型，所以我的实验和理解都是基于这种转发模型的。v1model模型图和p4程序的顺序结构如下图所示：<br><img src="/2019/10/24/P4_tutorials/1562848188244.png" alt><br><img src="/2019/10/24/P4_tutorials/1562848194541.png" alt><br>  所以呢执行的顺序可以清楚的看出来。</p>
-<h2 id="parse状态机的理解"><a href="/2019/10/24/P4_tutorials/#parse状态机的理解" class="headerlink" title="parse状态机的理解"></a>parse状态机的理解</h2><p>  但是针对parse这一环节，我一度很困扰，因为我一直想解析一个不定长的header，但是一直找不到案例，而且在p4_16的语言规范的文档中，提供了一种变长的header结构，但是前提是你得事前知道有多长，类似于ipv4的length字段，尽管ipv4有option字段，但是length字段又明确了长度，所以p4的变长header也是这种机制。但是这对我于p4的header解析，有了一个认识的契机，本来我一直以为这个解析和结构之间的声明顺序有很大的关系，结果，😀发现这个和华为提出的pof架构很类似都是利用偏移来做的解析，只不过p4语言更加高级，你不能从代码上看出偏移，但是本质还是偏移，比如下面这个数据包，（这是用scapy发出的数据包🐍）。</p></body></html>
+            <html><head></head><body></body></html>
         </div>
 
         
@@ -374,13 +372,7 @@
             
         </h1>
         <div class="content">
-            <html><head></head><body><h2 id="p4语言简介"><a href="/2019/10/24/P4_data_plane_lang/#p4语言简介" class="headerlink" title="p4语言简介"></a>p4语言简介</h2><p>P4(Programming Protocol-Independent Packet Processors) 是一种数据面的高级编程语言。数据面编程就是我们自定义匹配字段 ，自定义动作类型  ， 从而自定义流表 ，进而形成流水线。p4不仅可以对数据流进行转发，还可以对交换机等转发设备的数据处理流程进行软件编程定义。p4语言实现的交换机架构如下图<br><img src="/2019/10/24/P4_data_plane_lang/1561476867994.png" alt></p>
-<h2 id="p4语言特点"><a href="/2019/10/24/P4_data_plane_lang/#p4语言特点" class="headerlink" title="p4语言特点"></a>p4语言特点</h2><p>p4的几个需要注意的点：</p>
-<ul>
-<li>可以实现现有协议的转发功能</li>
-<li>可以自定义数据包结构</li>
-<li>可以在现有协议的基础上进行新的功能开发</li>
-<li>SW 风格开发——协议和转发的开发模式类似于软件开发</li></ul></body></html>
+            <html><head></head><body></body></html>
         </div>
 
         

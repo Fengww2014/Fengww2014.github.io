@@ -11,19 +11,16 @@
 <title>python_loop_break - Feng-Blog</title>
 
 
-    <meta name="description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
-<meta name="keywords" content="Python">
+    <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python_loop_break">
 <meta property="og:url" content="https://fengww2014.github.io/2019/10/10/python-loop-break/index.html">
 <meta property="og:site_name" content="Feng-Blog">
-<meta property="og:description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://source.unsplash.com/1600x900/?Python">
-<meta property="og:updated_time" content="2019-10-23T16:48:53.899Z">
+<meta property="og:updated_time" content="2020-06-04T16:20:51.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python_loop_break">
-<meta name="twitter:description" content="本文总结python 语言定时跳出循环的方案，主要分为两种情况：  循环中无阻塞的可能这种情况比较简单，可以直接用时间差的判断是否跳出即可：12345import timet_end = time.time() + 60 * 15while time.time() &amp;lt; t_end:    # do whatever you do但是必须保证不存在阻塞的可能">
 <meta name="twitter:image" content="https://source.unsplash.com/1600x900/?Python">
 
 
@@ -162,7 +159,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    2 minutes read (About 276 words)
+                    2 minutes read (About 277 words)
                 </span>
                 
                 
@@ -180,13 +177,15 @@
             
         </h1>
         <div class="content">
-            <html><head></head><body><p>本文总结python 语言定时跳出循环的方案，主要分为两种情况：</p>
+            <html><head></head><body><a id="more"></a>
+
+<p>本文总结python 语言定时跳出循环的方案，主要分为两种情况：</p>
 <ul>
 <li>循环中无阻塞的可能<br>这种情况比较简单，可以直接用时间差的判断是否跳出即可：<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line">t_end = time.time() + <span class="hljs-number">60</span> * <span class="hljs-number">15</span></span><br><span class="line"><span class="hljs-keyword">while</span> time.time() < t_end:</span><br><span class="line">    <span class="hljs-comment"># do whatever you do但是必须保证不存在阻塞的可能</span></span><br></pre></td></tr></tbody></table></figure>
 
 </li>
 </ul>
-<a id="more"></a>
+<!--more-->
 <ul>
 <li>循环中可能会发生阻塞<br>这种就比较复杂，因为可能循环会阻塞在特定的语句，所以无法用上面的方法来实现，<br>必须要另开一线程来使循环线程和计时判断线程同时进行，这样就不会有阻碍了。下面的<br>代码是我查资料采取的方案：<figure class="highlight python hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> multiprocessing <span class="hljs-keyword">import</span> Process</span><br><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">task</span><span class="hljs-params">(msg)</span>:</span></span><br><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-number">1</span>:</span><br><span class="line">    	<span class="hljs-keyword">print</span> (<span class="hljs-string">'hello, %s'</span> % msg)</span><br><span class="line">    	time.sleep(<span class="hljs-number">1</span>)</span><br><span class="line">    	<span class="hljs-keyword">pass</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line">    p = Process(target=task, args=(<span class="hljs-string">'world'</span>,))</span><br><span class="line"></span><br><span class="line">    p.start()</span><br><span class="line">    p.join(<span class="hljs-number">0.15</span>)</span><br><span class="line">    <span class="hljs-keyword">if</span> p.is_alive():</span><br><span class="line">        print(<span class="hljs-string">'Process: %s is running'</span> % p.pid)</span><br><span class="line">        p.terminate()</span><br></pre></td></tr></tbody></table></figure>
 

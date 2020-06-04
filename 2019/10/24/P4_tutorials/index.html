@@ -11,19 +11,16 @@
 <title>P4_tutorials - Feng-Blog</title>
 
 
-    <meta name="description" content="😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。 p4语言的执行流程  官方的教程demo中仅给出的">
-<meta name="keywords" content="P4">
+    <meta name="keywords" content="P4">
 <meta property="og:type" content="article">
 <meta property="og:title" content="P4_tutorials">
 <meta property="og:url" content="https://fengww2014.github.io/2019/10/24/P4_tutorials/index.html">
 <meta property="og:site_name" content="Feng-Blog">
-<meta property="og:description" content="😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。 p4语言的执行流程  官方的教程demo中仅给出的">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://source.unsplash.com/1600x900/?dataplane">
-<meta property="og:updated_time" content="2019-10-23T16:48:53.905Z">
+<meta property="og:updated_time" content="2020-06-04T16:21:52.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="P4_tutorials">
-<meta name="twitter:description" content="😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。 p4语言的执行流程  官方的教程demo中仅给出的">
 <meta name="twitter:image" content="https://source.unsplash.com/1600x900/?dataplane">
 
 
@@ -180,10 +177,11 @@
             
         </h1>
         <div class="content">
-            <html><head></head><body><p><strong>😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。</strong></p>
+            <html><head></head><body><a id="more"></a>
+
+<p><strong>😍经过接连两周连续每天熟悉p4官方给出的教程，慢慢的对p4有了进一步的理解。👍p4是一个数据面的编程语言，能够对数据包的包头自定义设计、自定义解析，然后设计流程让数据包按照包头的解析结果进行流表的匹配和动作的执行，动作包括：👉对数据包转发给下一个端口，clone数据包，修改数据包的包头、添加或者减少数据包的包头、给控制层转发数据包等等动作。</strong></p>
 <h1 id="p4语言的执行流程"><a href="/2019/10/24/P4_tutorials/#p4语言的执行流程" class="headerlink" title="p4语言的执行流程"></a>p4语言的执行流程</h1><p>  官方的教程demo中仅给出的是v1model的target转发模型，P4_16和P4_14都支持这种转发模型，所以我的实验和理解都是基于这种转发模型的。v1model模型图和p4程序的顺序结构如下图所示：<br><img src="/2019/10/24/P4_tutorials/1562848188244.png" alt><br><img src="/2019/10/24/P4_tutorials/1562848194541.png" alt><br>  所以呢执行的顺序可以清楚的看出来。</p>
 <h2 id="parse状态机的理解"><a href="/2019/10/24/P4_tutorials/#parse状态机的理解" class="headerlink" title="parse状态机的理解"></a>parse状态机的理解</h2><p>  但是针对parse这一环节，我一度很困扰，因为我一直想解析一个不定长的header，但是一直找不到案例，而且在p4_16的语言规范的文档中，提供了一种变长的header结构，但是前提是你得事前知道有多长，类似于ipv4的length字段，尽管ipv4有option字段，但是length字段又明确了长度，所以p4的变长header也是这种机制。但是这对我于p4的header解析，有了一个认识的契机，本来我一直以为这个解析和结构之间的声明顺序有很大的关系，结果，😀发现这个和华为提出的pof架构很类似都是利用偏移来做的解析，只不过p4语言更加高级，你不能从代码上看出偏移，但是本质还是偏移，比如下面这个数据包，（这是用scapy发出的数据包🐍）。</p>
-<a id="more"></a>
 <figure class="highlight plain hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendp(Ether()/IP()/TCP()/"Hello")</span><br></pre></td></tr></tbody></table></figure>
 
 <p>  那么当switch收到packet时，👉进入到start state状态，那么可以看出来这个包是第二层的包，那么势必要首先解析的是最外层的Ether层，他是从第0位开始解析到Ether header的size为止，👉那么下一步的状态就转移到parse_ether state状态，并且开始解析ipv4的header，同理他是从Ether结束的下一位一直解析ipv4的size长度位置为止，👉依次下去，所以每次你选择的state的解析动作一定是暴露在最外层的，你不能一上来就直接解析tcp，因为他会以为是从0开始解析tcp header长度个bit位，这是错误的，👍所以哪怕你对于这个header不感兴趣，你也得一层一层的解析header。解析完之后，所有解析过的header都是可以在后面的步骤中直接使用，包括赋值，和引用。</p>
